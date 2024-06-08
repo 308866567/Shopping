@@ -18,7 +18,7 @@ public class BrandController {
     private BrandService brandService;
 
     /****
-     * 增加方法
+     * 增加方法 http://127.0.0.1:8081/brand
      */
     @PostMapping
     public RespResult add(@RequestBody Brand brand){
@@ -50,6 +50,7 @@ public class BrandController {
     @PostMapping(value = "/search")
     public RespResult<List<Brand>> queryList(@RequestBody Brand brand){
         List<Brand> brands = brandService.queryList(brand);
+        System.out.println("brands = " + brands);
         return RespResult.ok(brands);
     }
 
@@ -62,6 +63,7 @@ public class BrandController {
             @PathVariable(value = "size")Long size,
             @RequestBody Brand brand){
         Page<Brand> pageInfo = brandService.queryPageList(brand,page,size);
+        System.out.println("pageInfo = " + pageInfo);
         return RespResult.ok(pageInfo);
     }
 }

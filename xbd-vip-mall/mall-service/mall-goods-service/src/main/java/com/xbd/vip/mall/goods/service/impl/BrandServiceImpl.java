@@ -29,7 +29,6 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper,Brand> implements 
         QueryWrapper<Brand> queryWrapper = new QueryWrapper<Brand>();
         //根据name查询品牌
         queryWrapper.like("name",brand.getName());
-
         //根据initial查询
         queryWrapper.eq("initial",brand.getInitial());
         return brandMapper.selectList(queryWrapper);
