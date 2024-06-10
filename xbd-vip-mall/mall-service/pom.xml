@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mall-goods-service</module>
+        <module>mall-file-service</module>
     </modules>
     <artifactId>mall-service</artifactId>
     <description>
