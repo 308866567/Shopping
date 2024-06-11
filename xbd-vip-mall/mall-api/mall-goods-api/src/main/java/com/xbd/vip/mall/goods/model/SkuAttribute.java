@@ -9,27 +9,23 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.List;
+
+
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "brand")
-//品牌表
-public class Brand implements Serializable {
-    //    品牌ID
-    //    MyBatisPlus主键策略注解
-    @TableId(type= IdType.AUTO)
+@NoArgsConstructor
+//MyBatisPlus表映射注解
+@TableName(value = "sku_attribute")
+public class SkuAttribute implements Serializable {
+
+    @TableId(type = IdType.AUTO)
     private Integer id;
-    //    品牌名字
     private String name;
-    //    品牌图片
-    private String image;
-    //    品牌首字母
-    private String initial;
-    //    品牌排序
+    private String options;
     private Integer sort;
 
-    //当前品牌拥有哪些分类
-    //分类
+    //对应分类
     @TableField(exist = false)
     private List<Category> categories;
+
 }
