@@ -14,6 +14,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "category")
+//三级分类表
 public class Category implements Serializable {
 
     @TableId(type = IdType.AUTO)
