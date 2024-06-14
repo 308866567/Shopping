@@ -46,4 +46,20 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper,Brand> implements 
         queryWrapper.like("name",brand.getName());
         return brandMapper.selectPage(new Page<Brand>(currentPage,size),queryWrapper);
     }
+
+    /***
+     * 根据分类ID查询品牌
+     * @param id
+     * @return
+     */
+    @Override
+    public List<Brand> queryByCategoryId(Integer id) {
+        //查询分类ID对应的品牌集合
+        List<Integer> brandIds = brandMapper.queryBrandIds(id);
+        //根据品牌ID集合查询品牌信息
+        List<Brand> brands = brandMapper.selectBatchIds(brandIds);
+        return brands;
+    }
+
+
 }

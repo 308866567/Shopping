@@ -66,4 +66,13 @@ public class BrandController {
         System.out.println("pageInfo = " + pageInfo);
         return RespResult.ok(pageInfo);
     }
+
+    /****
+     * 根据分类ID查询品牌
+     */
+    @GetMapping(value = "/category/{id}")
+    public RespResult<List<Brand>> categoryBrands(@PathVariable(value = "id") Integer id){
+        List<Brand> brands = brandService.queryByCategoryId(id);
+        return RespResult.ok(brands);
+    }
 }
