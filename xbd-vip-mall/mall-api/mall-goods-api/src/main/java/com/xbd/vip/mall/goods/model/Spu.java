@@ -22,6 +22,7 @@ public class Spu {
     private Integer brandId;
     private Integer categoryOneId;
     private Integer categoryTwoId;
+    //三级分类id
     private Integer categoryThreeId;
     private String images;
     private String afterSalesService;
