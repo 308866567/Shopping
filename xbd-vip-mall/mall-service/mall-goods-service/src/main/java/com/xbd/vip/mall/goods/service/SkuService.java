@@ -13,5 +13,16 @@ public interface SkuService extends IService<Sku> {
      * @return
      */
     List<Sku> typeSkuItems(Integer id);
+    /***
+     * 清理分类ID下的推广产品
+     * @param id
+     */
+    void delTypeSkuItems(Integer id);
+
+    /***
+     * 更新分类ID下的推广产品
+     * @param id
+     */
+    List<Sku> updateTypeSkuItems(Integer id) ;
 }
 
