@@ -5,9 +5,7 @@ import com.xbd.mall.util.RespResult;
 import com.xbd.vip.mall.goods.model.Sku;
 import com.xbd.vip.mall.goods.service.SkuService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
