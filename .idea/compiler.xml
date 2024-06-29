@@ -11,12 +11,14 @@
         <module name="mall-goods-api" />
         <module name="mall-goods-service" />
         <module name="mall-common" />
+        <module name="mall-canal-service" />
         <module name="mall-service-dependency" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="mall-canal-service" options="-parameters" />
       <module name="mall-common" options="-parameters" />
       <module name="mall-file-service" options="-parameters" />
       <module name="mall-goods-api" options="-parameters" />
