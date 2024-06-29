@@ -4,11 +4,14 @@ package com.xbd.vip.canal.listener;
 import com.xbd.vip.mall.goods.feign.SkuFeign;
 import com.xbd.vip.mall.goods.model.AdItems;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import top.javatool.canal.client.annotation.CanalTable;
 import top.javatool.canal.client.handler.EntryHandler;
+
+import javax.annotation.Resource;
 
 @Component
 @CanalTable(value = "ad_items")
@@ -18,8 +21,12 @@ public class AdItemsHandler implements EntryHandler<AdItems> {
     @Autowired
     private SkuFeign skuFeign;
 
+//    @Resource
     @Autowired
+    @Qualifier(value = "restTemplate")
     private RestTemplate restTemplate;
+    //nginx清理缓存地址 TODO 需要虚拟机端口转发
+    //String url = "http://192.168.100.130/purge/sku/aditems/type?id=1";
 
     @Override
     public void insert(AdItems adItems) {
@@ -27,6 +34,7 @@ public class AdItemsHandler implements EntryHandler<AdItems> {
 //        System.out.println("adItems = " + adItems);
 
         skuFeign.updateTypeItems(adItems.getId());
+//        restTemplate.getForObject(url,String.class);
     }
 
     @Override
