@@ -1,6 +1,7 @@
 package com.xbd.vip.mall.goods.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.xbd.mall.util.RespResult;
