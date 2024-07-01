@@ -21,18 +21,17 @@ public class AdItemsHandler implements EntryHandler<AdItems> {
     @Autowired
     private SkuFeign skuFeign;
 
-//    @Resource
+    /*
     @Autowired
     @Qualifier(value = "restTemplate")
     private RestTemplate restTemplate;
-    //nginx清理缓存地址 TODO 需要虚拟机端口转发
-    //String url = "http://192.168.100.130/purge/sku/aditems/type?id=1";
-
+    nginx清理缓存地址 TODO 需要虚拟机端口转发
+    String url = "http://192.168.100.130/purge/sku/aditems/type?id=1";
+    */
     @Override
     public void insert(AdItems adItems) {
 //        System.out.println("insert\n");
 //        System.out.println("adItems = " + adItems);
-
         skuFeign.updateTypeItems(adItems.getId());
 //        restTemplate.getForObject(url,String.class);
     }
@@ -42,7 +41,6 @@ public class AdItemsHandler implements EntryHandler<AdItems> {
 //        System.out.println("update\n");
 //        System.out.println(before);
 //        System.out.println(after);
-
         if (before.getType().intValue() != after.getType().intValue()) {
             skuFeign.updateTypeItems(before.getId());
         }

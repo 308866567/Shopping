@@ -27,7 +27,7 @@ public class SkuSearchController {
      * @return
      */
     @DeleteMapping(value = "/del/{id}")
-    public RespResult add(@PathVariable String id) {
+    public RespResult del(@PathVariable String id) {
         skuSearchService.del(id);
         return RespResult.ok();
     }
