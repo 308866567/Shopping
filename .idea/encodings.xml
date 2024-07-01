@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-api/mall-goods-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-api/mall-search-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-api/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-gateway/src/main/java" charset="UTF-8" />
@@ -10,6 +11,7 @@
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-service/mall-file-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-service/mall-file-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-service/mall-goods-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-service/mall-search-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-service/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-util/mall-common/src/main/java" charset="UTF-8" />
