@@ -1,10 +1,14 @@
 package com.xbd.vip.mall.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.xbd.vip.mall.mapper.SkuSearchMapper;
 import com.xbd.vip.mall.search.model.SkuEs;
 import com.xbd.vip.mall.service.SkuSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 public class SkuSearchServiceImpl implements SkuSearchService {
@@ -17,6 +21,11 @@ public class SkuSearchServiceImpl implements SkuSearchService {
      */
     @Override
     public void add(SkuEs skuEs) {
+        //属性转换
+        String skuAttribute = skuEs.getSkuAttribute();
+        if(!StringUtils.isEmpty(skuAttribute)){
+            skuEs.setAttrMap(JSON.parseObject(skuAttribute, Map.class));
+        }
         skuSearchMapper.save(skuEs);
     }
 
@@ -27,7 +36,6 @@ public class SkuSearchServiceImpl implements SkuSearchService {
      */
     @Override
     public void del(String id) {
-
         skuSearchMapper.deleteById(id);
     }
 }

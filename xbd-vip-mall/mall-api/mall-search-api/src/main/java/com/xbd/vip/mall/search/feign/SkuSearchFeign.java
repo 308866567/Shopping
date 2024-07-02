@@ -19,5 +19,5 @@ public interface SkuSearchFeign {
      * @return
      */
     @DeleteMapping(value = "/del/{id}")
-    RespResult del(@PathVariable String id);
+    RespResult del(@PathVariable("id") String id);
 }
