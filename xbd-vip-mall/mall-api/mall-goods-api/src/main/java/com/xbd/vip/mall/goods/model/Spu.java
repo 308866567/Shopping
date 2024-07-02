@@ -7,13 +7,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 //MyBatisPlus表映射注解
 @TableName(value = "spu")
-public class Spu {
+public class Spu implements Serializable {
 
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
