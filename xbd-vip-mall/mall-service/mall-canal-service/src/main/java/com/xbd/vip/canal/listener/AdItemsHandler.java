@@ -4,10 +4,7 @@ package com.xbd.vip.canal.listener;
 import com.xbd.vip.mall.goods.feign.SkuFeign;
 import com.xbd.vip.mall.goods.model.AdItems;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.stereotype.Component;;
 import top.javatool.canal.client.annotation.CanalTable;
 import top.javatool.canal.client.handler.EntryHandler;
 
