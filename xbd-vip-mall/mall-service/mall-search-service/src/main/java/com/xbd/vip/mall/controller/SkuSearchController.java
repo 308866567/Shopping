@@ -6,11 +6,23 @@ import com.xbd.vip.mall.service.SkuSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping(value = "/search")
 public class SkuSearchController {
     @Autowired
     private SkuSearchService skuSearchService;
+
+
+
+    //localhost:8084/search?keywords=华为
+    @GetMapping
+    public RespResult<Map<String, Object>> search(@RequestParam Map<String, Object> searchMap) {
+        Map<String, Object> resultMap = skuSearchService.search(searchMap);
+        return RespResult.ok(resultMap);
+    }
+
     /****
      * 单个商品导入
      * 增加索引
