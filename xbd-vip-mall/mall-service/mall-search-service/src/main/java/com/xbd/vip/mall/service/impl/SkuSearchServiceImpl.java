@@ -1,6 +1,7 @@
 package com.xbd.vip.mall.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONException;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.xbd.vip.mall.mapper.SkuSearchMapper;
 import com.xbd.vip.mall.search.model.SkuEs;
@@ -19,10 +20,7 @@ import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class SkuSearchServiceImpl implements SkuSearchService {
@@ -71,6 +69,8 @@ public class SkuSearchServiceImpl implements SkuSearchService {
         Map<String, Object> resultMap = new HashMap<String, Object>();
         //分组搜索结果解析
         parseGroup(page.getAggregations(), resultMap);
+        //属性数据解析
+        attrParse(resultMap);
         List<SkuEs> list = page.getContent();
         resultMap.put("list", list);
         resultMap.put("totalElements", page.getTotalElements());
@@ -112,6 +112,48 @@ public class SkuSearchServiceImpl implements SkuSearchService {
                     .terms("brandList") //查询的数据对应别名,类似map的key
                     .field("brandName") //根据brandName分组
                     .size(100));//分组查询100条
+        }
+        //查询属性
+        builder.addAggregation(AggregationBuilders
+                .terms("attrmaps")
+                .field("skuAttribute")
+                .size(10000));
+    }
+
+    /**
+     * 解析属性集合
+     */
+    public void attrParse(Map<String, Object> groupMap) {
+        /*
+        1、将所有属性信息传过来，并取出存到groupList中
+        2、循环groupList
+        3、把所有相同属性名的结果集合收集到一起
+        4、收集完成后，替换原来groupMap中的属性数据
+        */
+        //获取属性分组数据
+        Object attrgroup = groupMap.get("attrmaps");
+        if (attrgroup != null) {
+            List<String> groupList = (List<String>) attrgroup;
+            Map<String, Set<String>> allMaps = new HashMap<String, Set<String>>();
+            for (String attr : groupList) {
+                //将当前attr解析成Map
+                try {
+                    Map<String, String> attrMap = JSON.parseObject(attr, Map.class);
+                    for (Map.Entry<String, String> entry : attrMap.entrySet()) {
+                        Set<String> values = allMaps.get(entry.getKey());
+                        if (values == null) {
+                            values = new HashSet<String>();
+                        }
+                        values.add(entry.getValue());
+                        allMaps.put(entry.getKey(),values);
+                    }
+                }catch (JSONException e){
+                    //JSON格式化失败则放弃
+                    e.printStackTrace();
+                    continue;
+                }
+            }
+            groupMap.put("attrmaps",allMaps);
         }
     }
 
