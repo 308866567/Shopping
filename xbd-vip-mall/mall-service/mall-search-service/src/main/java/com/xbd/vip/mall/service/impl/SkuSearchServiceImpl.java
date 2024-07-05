@@ -15,6 +15,8 @@ import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -138,8 +140,20 @@ public class SkuSearchServiceImpl implements SkuSearchService {
                     //执行查询
                     boolQuery.must(QueryBuilders.termQuery("attrMap." + key + ".keyword", value));
                 }
-
             }
+            //排序
+            Object sfield = searchMap.get("sfield");//排序字段
+            Object sm = searchMap.get("sm");//降序DESC升序ASC
+
+            if (sfield != null && sm != null) {
+                if (!StringUtils.isEmpty(sfield.toString()) && !StringUtils.isEmpty(sm.toString())) {
+                    queryBuilder.withSort(
+                            SortBuilders.fieldSort(sfield.toString())
+                                    .order(SortOrder.valueOf(sm.toString()))                    );
+                }
+            }
+
+
         }
         //分页
         queryBuilder.withPageable(PageRequest.of(currentPage(searchMap), 10));
