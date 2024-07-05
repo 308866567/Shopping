@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.xbd.vip.mall.mapper.SkuSearchMapper;
 import com.xbd.vip.mall.search.model.SkuEs;
 import com.xbd.vip.mall.service.SkuSearchService;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.aggregations.Aggregation;
@@ -16,6 +17,7 @@ import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
@@ -73,6 +75,7 @@ public class SkuSearchServiceImpl implements SkuSearchService {
         attrParse(resultMap);
         List<SkuEs> list = page.getContent();
         resultMap.put("list", list);
+        //总数
         resultMap.put("totalElements", page.getTotalElements());
         return resultMap;
     }
@@ -81,16 +84,79 @@ public class SkuSearchServiceImpl implements SkuSearchService {
      * 根据keywords构建搜索条件
      */
     public NativeSearchQueryBuilder queryBuilder(Map<String, Object> searchMap) {
+        //QueryBuilder构建
+        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
+        //多条件组合查询对象
+        BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
         //判断关键词是否为空,不为空,则设置条件
-        NativeSearchQueryBuilder builder = new NativeSearchQueryBuilder();
         if (searchMap != null && searchMap.size() > 0) {
             //获取关键词
             Object keywords = searchMap.get("keywords");
-            if (!StringUtils.isEmpty(keywords.toString())) {
-                builder.withQuery(QueryBuilders.termQuery("name", keywords.toString()));
+            if (keywords != null) {
+                if (!StringUtils.isEmpty(keywords.toString())) {
+                    boolQuery.must(QueryBuilders.termQuery("name", keywords));
+                }
+            }
+            //分类
+            Object category = searchMap.get("category");
+            if (category != null) {
+                if (!StringUtils.isEmpty(category.toString())) {
+                    boolQuery.must(QueryBuilders.termQuery("categoryName", category));
+                }
+            }
+            //品牌
+            Object brand = searchMap.get("brand");
+            if (brand != null) {
+                if (!StringUtils.isEmpty(brand.toString())) {
+                    boolQuery.must(QueryBuilders.termQuery("brandName", brand));
+                }
+            }
+            //价格
+            Object price = searchMap.get("price");
+            if (price != null) {
+                if (!StringUtils.isEmpty(price.toString())) {
+                    String[] prices = price.toString()
+                            .replace("元", "")
+                            .replace("以上", "")
+                            .split("-");
+
+                    //price>[0]
+                    boolQuery.must(QueryBuilders.rangeQuery("price").gt(Integer.valueOf(prices[0])));
+                    //price<[1]
+                    if (prices.length == 2) {
+                        boolQuery.must(QueryBuilders.rangeQuery("price").lte(Integer.valueOf(prices[1])));
+                    }
+                }
+            }
+
+            //动态属性查询
+            for (Map.Entry<String, Object> entry : searchMap.entrySet()) {
+                if (entry.getKey().startsWith("attr_")) {
+                    //获取结果
+                    String key = entry.getKey().replaceFirst("attr_", "");
+                    String value = entry.getValue().toString();
+                    //执行查询
+                    boolQuery.must(QueryBuilders.termQuery("attrMap." + key + ".keyword", value));
+                }
+
             }
         }
-        return builder;
+        //分页
+        queryBuilder.withPageable(PageRequest.of(currentPage(searchMap), 10));
+        return queryBuilder.withQuery(boolQuery);
+    }
+
+    /*
+    获取分页参数
+     */
+    public int currentPage(Map<String, Object> searchMap) {
+        try {
+            Object currentPage = searchMap.get("page");
+            return Integer.valueOf(currentPage.toString()) > 0 ? Integer.valueOf(currentPage.toString()) - 1 : 0;
+
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     /***
@@ -145,15 +211,15 @@ public class SkuSearchServiceImpl implements SkuSearchService {
                             values = new HashSet<String>();
                         }
                         values.add(entry.getValue());
-                        allMaps.put(entry.getKey(),values);
+                        allMaps.put(entry.getKey(), values);
                     }
-                }catch (JSONException e){
+                } catch (JSONException e) {
                     //JSON格式化失败则放弃
                     e.printStackTrace();
                     continue;
                 }
             }
-            groupMap.put("attrmaps",allMaps);
+            groupMap.put("attrmaps", allMaps);
         }
     }
 
