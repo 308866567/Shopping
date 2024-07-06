@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.xbd.vip.mall.mapper.SkuSearchMapper;
 import com.xbd.vip.mall.search.model.SkuEs;
 import com.xbd.vip.mall.service.SkuSearchService;
+import com.xbd.vip.mall.util.HighlightResultMapper;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -15,21 +16,27 @@ import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.aggregations.bucket.terms.ParsedStringTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.Highlighter;
 import java.util.*;
 
 @Service
 public class SkuSearchServiceImpl implements SkuSearchService {
     @Autowired
     private SkuSearchMapper skuSearchMapper;
+
+    @Autowired
+    private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     /***
      * 单个导入ES
@@ -67,8 +74,19 @@ public class SkuSearchServiceImpl implements SkuSearchService {
         NativeSearchQueryBuilder queryBuilder = queryBuilder(searchMap);
         //分组搜索调用
         group(queryBuilder, searchMap);
+        //高亮关键词配置
+        HighlightBuilder.Field field = new HighlightBuilder.
+                Field("name").                      //指定的高亮域
+                preTags("<span style=\"color:red\">").   //前缀
+                postTags("</span>").                      //后缀
+                fragmentSize(100);//碎片长度
+        //添加高亮域
+        queryBuilder.withHighlightFields(field);
+
         //skuSearchMapper进行搜素
-        AggregatedPage<SkuEs> page = (AggregatedPage) skuSearchMapper.search(queryBuilder.build());
+//        AggregatedPage<SkuEs> page = (AggregatedPage) skuSearchMapper.search(queryBuilder.build());
+        AggregatedPage<SkuEs> page=elasticsearchRestTemplate.queryForPage
+                (queryBuilder.build(),SkuEs.class,new HighlightResultMapper());
         //获取结果集:集合列表,总记录数
         Map<String, Object> resultMap = new HashMap<String, Object>();
         //分组搜索结果解析
@@ -144,12 +162,11 @@ public class SkuSearchServiceImpl implements SkuSearchService {
             //排序
             Object sfield = searchMap.get("sfield");//排序字段
             Object sm = searchMap.get("sm");//降序DESC升序ASC
-
             if (sfield != null && sm != null) {
                 if (!StringUtils.isEmpty(sfield.toString()) && !StringUtils.isEmpty(sm.toString())) {
                     queryBuilder.withSort(
                             SortBuilders.fieldSort(sfield.toString())
-                                    .order(SortOrder.valueOf(sm.toString()))                    );
+                                    .order(SortOrder.valueOf(sm.toString())));
                 }
             }
 
