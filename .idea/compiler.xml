@@ -15,6 +15,7 @@
         <module name="mall-search-api" />
         <module name="mall-goods-service" />
         <module name="mall-common" />
+        <module name="mall-search-web" />
       </profile>
     </annotationProcessing>
   </component>
@@ -27,6 +28,7 @@
       <module name="mall-goods-service" options="-parameters" />
       <module name="mall-search-api" options="-parameters" />
       <module name="mall-search-service" options="-parameters" />
+      <module name="mall-search-web" options="-parameters" />
       <module name="mall-service-dependency" options="-parameters" />
     </option>
   </component>
