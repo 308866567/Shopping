@@ -28,6 +28,7 @@ public class SearchController {
         //搜索
         RespResult<Map<String, Object>> resultMap = skuSearchFeign.search(searchMap);
         model.addAttribute("result",resultMap.getData());
+        model.addAttribute("searchMap",searchMap);
         return "search";
     }
 }
