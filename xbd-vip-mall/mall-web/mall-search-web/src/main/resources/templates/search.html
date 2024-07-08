@@ -52,11 +52,17 @@
                     </div>
                     <div class="yui3-u Rit searchArea">
                         <div class="search">
-                            <form action="" class="sui-form form-inline">
+                            <form action="/web/search" class="sui-form form-inline">
                                 <!--searchAutoComplete-->
                                 <div class="input-append">
-                                    <input type="text" id="autocomplete" class="input-error input-xxlarge"/>
-                                    <button class="sui-btn btn-xlarge btn-danger" type="button">搜索</button>
+                                    <input
+                                            name="keywords"
+                                            th:value="${#maps.containsKey(searchMap,'keywords')}?${searchMap.keywords}:''"
+                                            type="text" id="autocomplete" class="input-error input-xxlarge"/>
+                                    <button
+                                            class="sui-btn btn-xlarge btn-danger"
+                                            type="submit">搜索
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -618,33 +624,25 @@
         </div>
         <!--selector-->
         <div class="clearfix selector">
-            <div class="type-wrap">
+            <div class="type-wrap" th:if="${#maps.containsKey(result,'categoryList')}">
                 <div class="fl key">分类</div>
-                <div class="fl value">家电、儿童、图书、视频</div>
+                <div class="fl value">
+                    <a class="mlr15" href="#" th:each="category:${result.categoryList}" th:text="${category}"></a>
+                </div>
                 <div class="fl ext"></div>
             </div>
-            <div class="type-wrap logo">
+
+            <div class="type-wrap logo" th:if="${#maps.containsKey(result,'brandList')}">
                 <div class="fl key brand">品牌</div>
                 <div class="value logos">
                     <ul class="logo-list">
-                        <li><img src="/img/_/phone01.png"/></li>
-                        <li><img src="/img/_/phone02.png"/></li>
-                        <li><img src="/img/_/phone03.png"/></li>
-                        <li><img src="/img/_/phone04.png"/></li>
-                        <li><img src="/img/_/phone05.png"/></li>
-                        <li><img src="/img/_/phone06.png"/></li>
-                        <li><img src="/img/_/phone07.png"/></li>
-                        <li><img src="/img/_/phone08.png"/></li>
-                        <li><img src="/img/_/phone09.png"/></li>
-                        <li><img src="/img/_/phone10.png"/></li>
-                        <li><img src="/img/_/phone11.png"/></li>
-                        <li><img src="/img/_/phone12.png"/></li>
-                        <li><img src="/img/_/phone13.png"/></li>
-                        <li><img src="/img/_/phone14.png"/></li>
-                        <li><img src="/img/_/phone15.png"/></li>
-                        <li><img src="/img/_/phone16.png"/></li>
-                        <li><img src="/img/_/phone17.png"/></li>
-                        <li><img src="/img/_/phone18.png"/></li>
+                        <li th:each="brand:${result.brandList}">
+                            <div>
+                                <a href="#" th:text="${brand}"></a>
+<!--    <img th:src="${brand.images}">
+               TODO 品牌图片实现-->
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 <div class="ext">
@@ -652,6 +650,7 @@
                     <a href="javascript:void(0);">更多</a>
                 </div>
             </div>
+
             <div class="type-wrap">
                 <div class="fl key">网络</div>
                 <div class="fl value">
@@ -784,7 +783,7 @@
                                 </strong>
                             </div>
                             <div class="attr">
-                                <a target="_blank" href="item.html" th:text="${item.name}" >
+                                <a target="_blank" href="item.html" th:utext="${item.name}">
                                 </a>
                             </div>
                             <div class="commit">
