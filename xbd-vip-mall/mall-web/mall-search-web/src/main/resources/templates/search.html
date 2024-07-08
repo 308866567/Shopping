@@ -609,29 +609,48 @@
 <div class="main">
     <div class="py-container">
         <!--bread-->
+<!--        已选条件-->
         <div class="bread">
             <ul class="fl sui-breadcrumb">
                 <li>
                     <a href="#">全部结果</a>
                 </li>
-                <li class="active">家用电器</li>
+                <li class="active" th:if="${#maps.containsKey(searchMap,'category')}">
+                    分类:<span th:text="${searchMap.category}"></span>
+                    <a href="#"></a>
+                </li>
             </ul>
-            <ul class="fl sui-tag">
-                <li class="with-x">小天鹅洗衣机<i>×</i></li>
-                <li class="with-x">格力空调<i>×</i></li>
-                <li class="with-x">美的风扇<i>×</i></li>
+            <ul class="fl sui-tag" >
+<!--                品牌-->
+                <li class="with-x" th:if="${#maps.containsKey(searchMap,'brand')}">
+                    品牌:<span th:text="${searchMap.brand}"></span>
+                    <a href="#"></a>
+                </li>
+<!--价格-->
+                <li class="with-x" th:if="${#maps.containsKey(searchMap,'price')}">
+                    <span th:text="${searchMap.price}"></span>
+                    <a href="#"></a>
+                </li>
+<!--属性-->
+                <li class="with-x" th:each="smp:${searchMap}"  th:if="${#strings.startsWith(smp.key,'attr_')}">
+                    <span th:text="${#strings.replace(smp.key,'attr_','')}">
+                        <span th:text="${smp.value}"></span>
+                    </span>
+                    <a href="#"></a>
+                </li>
             </ul>
         </div>
         <!--selector-->
+        <!--分类-->
         <div class="clearfix selector">
             <div class="type-wrap" th:if="${#maps.containsKey(result,'categoryList')}">
                 <div class="fl key">分类</div>
                 <div class="fl value">
-                    <a class="mlr15" href="#" th:each="category:${result.categoryList}" th:text="${category}"></a>
+                    <a class="mlr15"   th:each="category:${result.categoryList}" th:text="${category}"></a>
                 </div>
                 <div class="fl ext"></div>
             </div>
-
+            <!--品牌-->
             <div class="type-wrap logo" th:if="${#maps.containsKey(result,'brandList')}">
                 <div class="fl key brand">品牌</div>
                 <div class="value logos">
@@ -639,8 +658,8 @@
                         <li th:each="brand:${result.brandList}">
                             <div>
                                 <a href="#" th:text="${brand}"></a>
-<!--    <img th:src="${brand.images}">
-               TODO 品牌图片实现-->
+                                <!--    <img th:src="${brand.images}">
+                                               TODO 品牌图片实现-->
                             </div>
                         </li>
                     </ul>
@@ -650,74 +669,21 @@
                     <a href="javascript:void(0);">更多</a>
                 </div>
             </div>
-
-            <div class="type-wrap">
-                <div class="fl key">网络</div>
+            <!--属性-->
+            <div class="type-wrap" th:each="attr:${result.attrmaps}" th:unless="${#maps.containsKey(searchMap,'attr_'+attr.key)}">
+<!--                属性名-->
+                <div class="fl key"  th:text="${attr.key}"></div>
                 <div class="fl value">
                     <ul class="type-list">
-                        <li>
-                            <a>电信5G</a>
-                        </li>
-                        <li>
-                            <a>电信4G</a>
-                        </li>
-                        <li>
-                            <a>移动3G</a>
-                        </li>
-                        <li>
-                            <a>联通3G</a>
-                        </li>
-                        <li>
-                            <a>电信3G</a>
-                        </li>
-                        <li>
-                            <a>移动3G</a>
-                        </li>
-                        <li>
-                            <a>联通3G</a>
-                        </li>
-                        <li>
-                            <a>联通4G</a>
+                        <li th:each="opt:${attr.value}">
+                            <a href="#" th:text="${opt}"> 电信6g</a>
                         </li>
                     </ul>
                 </div>
                 <div class="fl ext"></div>
             </div>
-            <div class="type-wrap">
-                <div class="fl key">手机屏尺寸</div>
-                <div class="fl value">
-                    <ul class="type-list">
-                        <li>
-                            <a>5.0-5.9英寸</a>
-                        </li>
-                        <li>
-                            <a>6.0-6.2英寸</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="fl ext"></div>
-            </div>
-            <div class="type-wrap">
-                <div class="fl key">像素</div>
-                <div class="fl value">
-                    <ul class="type-list">
-                        <li>
-                            <a>3000万以上</a>
-                        </li>
-                        <li>
-                            <a>800-3000万</a>
-                        </li>
-                        <li>
-                            <a>1200-1599万</a>
-                        </li>
-                        <li>
-                            <a>1600万以上</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="fl ext"></div>
-            </div>
-            <div class="type-wrap">
+            <!--价格-->
+            <div class="type-wrap" th:unless="${#maps.containsKey(searchMap,'price')}">
                 <div class="fl key">价格范围</div>
                 <div class="fl value">
                     <ul class="type-list">
