@@ -3,6 +3,7 @@ package com.xbd.vip.mall.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONException;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.xbd.mall.util.PageInfo;
 import com.xbd.vip.mall.mapper.SkuSearchMapper;
 import com.xbd.vip.mall.search.model.SkuEs;
 import com.xbd.vip.mall.service.SkuSearchService;
@@ -97,6 +98,9 @@ public class SkuSearchServiceImpl implements SkuSearchService {
         resultMap.put("list", list);
         //总数
         resultMap.put("totalElements", page.getTotalElements());
+
+        //创建分页对象
+        PageInfo pageInfo =new PageInfo();
         return resultMap;
     }
 
