@@ -7,4 +7,8 @@ import com.xbd.vip.mall.goods.model.Spu;
 public interface SpuService extends IService<Spu> {
 
     void saveProduct(Product product);
+    /*
+    查询商品详细
+     */
+    Product findBySpuId(String id);
 }

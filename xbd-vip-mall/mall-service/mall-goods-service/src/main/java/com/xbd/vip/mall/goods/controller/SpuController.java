@@ -15,9 +15,23 @@ public class SpuController {
     @Autowired
     private SpuService spuService;
 
+    /*
+    产品保存
+     */
     @PostMapping(value = "/save")
-    public RespResult save(@RequestBody Product product){
+    public RespResult save(@RequestBody Product product) {
         spuService.saveProduct(product);
-        return  RespResult.ok();
+        return RespResult.ok();
+    }
+
+    /*
+    根据spu-id查询product
+     */
+    @GetMapping(value = "/product/{id}")
+    public RespResult<Product> one(@PathVariable(value = "id") String id) {
+        //查询spu-id
+        //查询sku集合
+        Product product = spuService.findBySpuId(id);
+        return RespResult.ok(product);
     }
 }

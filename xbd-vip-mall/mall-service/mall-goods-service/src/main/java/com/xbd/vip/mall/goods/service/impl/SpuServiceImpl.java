@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -36,7 +37,7 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuSe
         Spu spu = product.getSpu();
         //商品的保存
         //如果ID为空，则增加
-        if(StringUtils.isEmpty(spu.getId())){
+        if (StringUtils.isEmpty(spu.getId())) {
             //上架
             spu.setIsMarketable(1);
             //未删除
@@ -45,11 +46,11 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuSe
             spu.setStatus(1);
             //添加
             spuMapper.insert(spu);
-        }else{
+        } else {
             //ID 不为空，则修改
             spuMapper.updateById(spu);
             //删除之前的Sku记录
-            skuMapper.delete(new QueryWrapper<Sku>().eq("spu_id",spu.getId()));
+            skuMapper.delete(new QueryWrapper<Sku>().eq("spu_id", spu.getId()));
         }
         //上架
         spu.setIsMarketable(1);
@@ -94,5 +95,21 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuSe
             //增加
             skuMapper.insert(sku);
         }
+    }
+
+    /*
+        查询商品详细
+     */
+    @Override
+    public Product findBySpuId(String id) {
+        //查询spu-id
+        Spu spu = spuMapper.selectById(id);
+        //查询sku集合
+        QueryWrapper<Sku> queryWrapper = new QueryWrapper<Sku>().eq("spu_id", id);
+        List<Sku> skus = skuMapper.selectList(queryWrapper);
+        Product product = new Product();
+        product.setSpu(spu);
+        product.setSkus(skus);
+        return product;
     }
 }
