@@ -6,7 +6,13 @@
         <option value="$PROJECT_DIR$/gupaoedu-vip-mall/pom.xml" />
         <option value="$PROJECT_DIR$/xbd-vip-mall/mall-service/mall-file-service/pom.xml" />
         <option value="$PROJECT_DIR$/xbd-vip-mall/pom.xml" />
+        <option value="$PROJECT_DIR$/swagger-json/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/swagger-json/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="11" project-jdk-type="JavaSDK">

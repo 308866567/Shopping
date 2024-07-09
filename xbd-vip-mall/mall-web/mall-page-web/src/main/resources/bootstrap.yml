@@ -18,7 +18,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
 #页面生成存储路径
-pagepath: D:/pages/items/
+pagepath: D:/
 
 #日志配置
 logging:
