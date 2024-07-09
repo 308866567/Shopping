@@ -23,16 +23,17 @@ public class SearchController {
 
     /****
      * 搜索页面跳转
+     * 后端用Model给前端传参数
      * @return
      */
     @GetMapping
     public String search(Model model, @RequestParam(required = false) Map<String, Object> searchMap) {
         //搜索
         RespResult<Map<String, Object>> resultMap = skuSearchFeign.search(searchMap);
-       model.addAttribute("result",resultMap.getData());
+        model.addAttribute("result",resultMap.getData());
         model.addAttribute("searchMap",searchMap);
         //组装用户访问的url,基础的url是/web/search
-        model.addAttribute("url", UrlUtils.map2url("/web/search",searchMap));
+        model.addAttribute("url", UrlUtils.map2url("/web/search",searchMap,"page"));
         //没有排序参数的url
         model.addAttribute("urlsort", UrlUtils.replateUrlParameter(
                 model.getAttribute("url").toString(),"sfield","sm"));

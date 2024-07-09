@@ -86,6 +86,7 @@ public class SkuSearchServiceImpl implements SkuSearchService {
 
         //skuSearchMapper进行搜素
 //        AggregatedPage<SkuEs> page = (AggregatedPage) skuSearchMapper.search(queryBuilder.build());
+        //进行ES查询
         AggregatedPage<SkuEs> page=elasticsearchRestTemplate.queryForPage
                 (queryBuilder.build(),SkuEs.class,new HighlightResultMapper());
         //获取结果集:集合列表,总记录数
@@ -96,11 +97,13 @@ public class SkuSearchServiceImpl implements SkuSearchService {
         attrParse(resultMap);
         List<SkuEs> list = page.getContent();
         resultMap.put("list", list);
-        //总数
+        //查询到的信息总数
         resultMap.put("totalElements", page.getTotalElements());
-
-        //创建分页对象
-        PageInfo pageInfo =new PageInfo();
+        //当前页,0开始,所以+1
+        int currentPage=queryBuilder.build().getPageable().getPageNumber()+1;
+        //TODO 创建分页对象,用于前端显示页码,每页显示10条
+        PageInfo pageInfo =new PageInfo(page.getTotalElements(),currentPage,10);
+        resultMap.put("pageInfo",pageInfo);
         return resultMap;
     }
 
@@ -176,13 +179,13 @@ public class SkuSearchServiceImpl implements SkuSearchService {
 
 
         }
-        //分页
+        //TODO 分页,查询第几页,每页多少条
         queryBuilder.withPageable(PageRequest.of(currentPage(searchMap), 10));
         return queryBuilder.withQuery(boolQuery);
     }
 
     /*
-    获取分页参数
+    从前端请求获取分页参数
      */
     public int currentPage(Map<String, Object> searchMap) {
         try {

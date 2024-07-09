@@ -609,7 +609,7 @@
 <div class="main">
     <div class="py-container">
         <!--bread-->
-<!--        已选条件-->
+        <!--        已选条件-->
         <div class="bread">
             <ul class="fl sui-breadcrumb">
                 <li>
@@ -620,19 +620,19 @@
                     <a th:href="@{${#strings.replace(url,'category='+searchMap.category,'')}}">x</a>
                 </li>
             </ul>
-            <ul class="fl sui-tag" >
-<!--                品牌-->
+            <ul class="fl sui-tag">
+                <!--                品牌-->
                 <li class="with-x" th:if="${#maps.containsKey(searchMap,'brand')}">
                     品牌:<span th:text="${searchMap.brand}"></span>
                     <a th:href="@{${#strings.replace(url,'brand='+searchMap.brand,'')}}">x</a>
                 </li>
-<!--价格-->
+                <!--价格-->
                 <li class="with-x" th:if="${#maps.containsKey(searchMap,'price')}">
                     <span th:text="${searchMap.price}"></span>
-                    <a th:href="@{${#strings.replace(url,'price='+searchMap.price,'')}}" >x</a>
+                    <a th:href="@{${#strings.replace(url,'price='+searchMap.price,'')}}">x</a>
                 </li>
-<!--属性-->
-                <li class="with-x" th:each="smp:${searchMap}"  th:if="${#strings.startsWith(smp.key,'attr_')}">
+                <!--属性-->
+                <li class="with-x" th:each="smp:${searchMap}" th:if="${#strings.startsWith(smp.key,'attr_')}">
                     <span th:text="${#strings.replace(smp.key,'attr_','')}">
                         <span th:text="${smp.value}"></span>
                     </span>
@@ -647,7 +647,7 @@
                 <div class="fl key">分类</div>
                 <div class="fl value">
                     <div th:each="category:${result.categoryList}">
-                        <a th:href="@{${url}(category=${category})}"    th:text="${category}"></a>
+                        <a th:href="@{${url}(category=${category})}" th:text="${category}"></a>
                     </div>
 
                 </div>
@@ -673,9 +673,10 @@
                 </div>
             </div>
             <!--属性-->
-            <div class="type-wrap" th:each="attr:${result.attrmaps}" th:unless="${#maps.containsKey(searchMap,'attr_'+attr.key)}">
-<!--                属性名-->
-                <div class="fl key"  th:text="${attr.key}"></div>
+            <div class="type-wrap" th:each="attr:${result.attrmaps}"
+                 th:unless="${#maps.containsKey(searchMap,'attr_'+attr.key)}">
+                <!--                属性名-->
+                <div class="fl key" th:text="${attr.key}"></div>
                 <div class="fl value">
                     <ul class="type-list">
                         <li th:each="opt:${attr.value}">
@@ -764,29 +765,23 @@
                 <div class="sui-pagination pagination-large">
                     <ul>
                         <li class="prev disabled">
-                            <a href="#">«上一页</a>
+                            <a th:href="@{${url}(page=${result.pageInfo.upper})}">«上一页</a>
                         </li>
-                        <li class="active">
-                            <a href="#">1</a>
+
+                        <li th:each="num:${#numbers.sequence(result.pageInfo.lpage,result.pageInfo.rpage)}"
+                            th:class="${num}==${result.pageInfo.currentpage}?'active':''">
+                            <a th:href="@{${url}(page=${num})}" th:text="${num}"></a>
                         </li>
-                        <li>
-                            <a href="#">2</a>
-                        </li>
-                        <li>
-                            <a href="#">3</a>
-                        </li>
-                        <li>
-                            <a href="#">4</a>
-                        </li>
-                        <li>
-                            <a href="#">5</a>
-                        </li>
+
                         <li class="dotted"><span>...</span></li>
+
                         <li class="next">
-                            <a href="#">下一页»</a>
+                            <a th:href="@{${url}(page=${result.pageInfo.next})}">下一页»</a>
                         </li>
                     </ul>
-                    <div><span>共10页&nbsp;</span><span>
+                    <div><span>共<i th:text="${result.pageInfo.last}"></i>页&nbsp;</span>
+
+                        <span>
       到第
       <input type="text" class="page-num">
       页 </span></div>
