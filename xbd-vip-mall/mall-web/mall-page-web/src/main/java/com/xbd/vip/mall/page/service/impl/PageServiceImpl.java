@@ -90,7 +90,6 @@ public class PageServiceImpl implements PageService {
             }
             dataMap.put("skuList", skuList);
             return dataMap;
-
         }
         return null;
     }
