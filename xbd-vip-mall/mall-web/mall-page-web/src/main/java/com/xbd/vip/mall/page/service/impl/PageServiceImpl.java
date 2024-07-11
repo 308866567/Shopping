@@ -65,7 +65,7 @@ public class PageServiceImpl implements PageService {
             //Spu
             dataMap.put("spu", product.getSpu());
             //图片处理,图片以逗号拼接
-            dataMap.put("images", product.getSpu().getImages().split(","));
+            dataMap.put("images",  product.getSpu().getImages().split(","));
             //属性列表
             dataMap.put("attrs", JSON.parseObject(product.getSpu().getAttributeList(), Map.class));
             //三级分类
