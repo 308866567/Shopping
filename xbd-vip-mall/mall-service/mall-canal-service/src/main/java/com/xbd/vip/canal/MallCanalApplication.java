@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 //关闭数据库自动下载
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableFeignClients(basePackages = {
+        "com.xbd.vip.mall.page.feign",
         "com.xbd.vip.mall.search.feign",
         "com.xbd.vip.mall.goods.feign"})
 //@ComponentScan(basePackages = "com.xbd.vip.mall.config")

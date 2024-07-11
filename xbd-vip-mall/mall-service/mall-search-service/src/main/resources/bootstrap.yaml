@@ -19,3 +19,5 @@ spring:
 logging:
   pattern:
     console: "%msg%n"
+  level:
+    root: info
