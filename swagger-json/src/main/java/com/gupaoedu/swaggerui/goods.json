@@ -16,18 +16,6 @@
   "host": "petstore.swagger.io",
   "basePath": "/v2",
   "tags": [
-        {
-      "name": "AdItemsController",
-      "description": "AdItemsController"
-    },
-    {
-      "name": "AdItemsController",
-      "description": "AdItemsController"
-    },
-    {
-      "name": "AdItemsController",
-      "description": "AdItemsController"
-    },
     {
       "name": "AdItemsController",
       "description": "AdItemsController"
@@ -37,44 +25,8 @@
       "description": "BrandController"
     },
     {
-      "name": "BrandController",
-      "description": "BrandController"
-    },
-    {
-      "name": "BrandController",
-      "description": "BrandController"
-    },
-    {
-      "name": "BrandController",
-      "description": "BrandController"
-    },
-    {
       "name": "CategoryController",
       "description": "CategoryController"
-    },
-    {
-      "name": "CategoryController",
-      "description": "CategoryController"
-    },
-    {
-      "name": "CategoryController",
-      "description": "CategoryController"
-    },
-    {
-      "name": "CategoryController",
-      "description": "CategoryController"
-    },
-    {
-      "name": "CategoryAttrController",
-      "description": "CategoryAttrController"
-    },
-    {
-      "name": "CategoryAttrController",
-      "description": "CategoryAttrController"
-    },
-    {
-      "name": "CategoryAttrController",
-      "description": "CategoryAttrController"
     },
     {
       "name": "CategoryAttrController",
@@ -4142,8 +4094,4 @@
       "description": "Spu"
     }
   },
-  "externalDocs": {
-    "description": "云商城",
-    "url": "admin"
-  }
 }
