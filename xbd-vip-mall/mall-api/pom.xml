@@ -12,6 +12,7 @@
     <modules>
         <module>mall-goods-api</module>
         <module>mall-page-api</module>
+        <module>mall-cart-api</module>
     </modules>
     <artifactId>mall-api</artifactId>
     <description>

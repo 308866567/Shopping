@@ -13,6 +13,7 @@
         <module>mall-goods-service</module>
         <module>mall-file-service</module>
         <module>mall-search-service</module>
+        <module>mall-cart-service</module>
     </modules>
     <artifactId>mall-service</artifactId>
     <description>
