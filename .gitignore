@@ -24,3 +24,5 @@ hs_err_pid*
 replay_pid*
 
 *.*vsdx
+.idea/jarRepositories.xml
+.idea/modules.xml
