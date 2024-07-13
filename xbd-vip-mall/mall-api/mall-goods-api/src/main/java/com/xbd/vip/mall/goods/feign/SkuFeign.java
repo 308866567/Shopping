@@ -14,6 +14,8 @@ import java.util.List;
 @RequestMapping(value = "/sku")
 public interface SkuFeign {
 
+    @GetMapping(value = "/{id}")
+    RespResult<Sku> one(@PathVariable(value = "id") String id);
     /****
      * 指定分类下的推广产品列表
      */

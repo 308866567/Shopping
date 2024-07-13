@@ -16,6 +16,14 @@ public class SkuController {
     @Autowired
     private SkuService skuService;
 
+
+    @GetMapping(value = "/{id}")
+    public RespResult<Sku> one(@PathVariable(value = "id") String id){
+        Sku sku = skuService.getById(id);
+        return RespResult.ok(sku);
+    }
+
+    //推广产品
     @GetMapping(value = "/aditems/type")
     public RespResult<List<Sku>> typeItems(@RequestParam(value = "id") Integer id) {
         List<Sku> skus = skuService.typeSkuItems(id);
