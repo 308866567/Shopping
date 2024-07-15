@@ -7,7 +7,11 @@ import com.xbd.vip.mall.cart.service.CartService;
 import com.xbd.vip.mall.goods.feign.SkuFeign;
 import com.xbd.vip.mall.goods.model.Sku;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -18,10 +22,17 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private SkuFeign skuFeign;
 
+    @Override
+    public List<Cart> list(String userName) {
+        Cart cart=new Cart();
+        cart.setUserName(userName);
+        return cartMapper.findAll(Example.of(cart), Sort.by("_id"));
+    }
+
     /*
-    加入购物车
-    num是当前商品总数量
-     */
+        加入购物车
+        num是当前商品总数量
+         */
     @Override
     public void add(String id, String userName, Integer num) {
         //id不能冲突
