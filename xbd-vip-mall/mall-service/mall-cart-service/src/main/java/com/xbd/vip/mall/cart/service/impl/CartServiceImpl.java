@@ -9,6 +9,9 @@ import com.xbd.vip.mall.goods.model.Sku;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +25,17 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private SkuFeign skuFeign;
 
+    @Autowired
+    private MongoTemplate mongoTemplate;
+    /**
+     * 根据集合id删除指定的购物车商品
+     * @param ids
+     */
+    @Override
+    public void delete(List<String> ids) {
+        //_id in ids
+        mongoTemplate.remove(Query.query(Criteria.where("_id").in(ids)),Cart.class);
+    }
 
     @Override
     public Iterable<Cart> list(List<String> ids) {

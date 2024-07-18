@@ -15,17 +15,31 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
-    /*
-        根据购物车商品id集合查询购物车列表
+
+
+    /**
+     * 删除
+     * @param ids
+     * @return
+     */
+    @DeleteMapping()
+    public RespResult delete(@RequestBody List<String> ids) {
+        cartService.delete(ids);
+        return RespResult.ok();
+    }
+    /**
+     *根据购物车商品id集合查询购物车列表
+     * @param ids
+     * @return
      */
     @PostMapping(value = "list")
     public RespResult<List<Cart>> list(@RequestBody List<String> ids) {
         //购物车集合
         List<Cart>  carts = Lists.newArrayList(cartService.list(ids));
-        System.out.println(carts);
+//        System.out.println(carts);
         return RespResult.ok(carts);
     }
-    /****
+    /**
      * 根据用户名查询购物车列表
      * http://localhost:8087/cart/list
      * @return
@@ -37,10 +51,13 @@ public class CartController {
         List<Cart> carts = cartService.list(userName);
         return RespResult.ok(carts);
     }
-    /*
-    增加购物车方法
-    localhost:8087/cart/1319051488240168961/2
-    localhost:8087/cart/1318599511605563394/1
+    /**
+     * 增加购物车方法
+     * localhost:8087/cart/1319051488240168961/2
+     * localhost:8087/cart/1318599511605563394/1
+     * @param id
+     * @param num
+     * @return
      */
     @GetMapping(value = "/{id}/{num}")
     public RespResult add(@PathVariable(value = "id") String id,
