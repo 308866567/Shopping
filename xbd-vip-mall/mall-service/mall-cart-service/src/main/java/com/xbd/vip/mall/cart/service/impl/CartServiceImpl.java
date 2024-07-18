@@ -22,6 +22,12 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private SkuFeign skuFeign;
 
+
+    @Override
+    public Iterable<Cart> list(List<String> ids) {
+        return cartMapper.findAllById(ids);
+    }
+
     @Override
     public List<Cart> list(String userName) {
         Cart cart=new Cart();

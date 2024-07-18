@@ -16,4 +16,6 @@ public interface CartService {
      * @return
      */
     List<Cart> list(String userName);
+
+    Iterable<Cart> list(List<String> ids);
 }
