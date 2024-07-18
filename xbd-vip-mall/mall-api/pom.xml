@@ -13,6 +13,8 @@
         <module>mall-goods-api</module>
         <module>mall-page-api</module>
         <module>mall-cart-api</module>
+        <module>mall-user-api</module>
+        <module>mall-user-api</module>
     </modules>
     <artifactId>mall-api</artifactId>
     <description>

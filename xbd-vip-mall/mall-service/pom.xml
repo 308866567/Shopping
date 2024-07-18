@@ -14,6 +14,7 @@
         <module>mall-file-service</module>
         <module>mall-search-service</module>
         <module>mall-cart-service</module>
+        <module>mall-user-service</module>
     </modules>
     <artifactId>mall-service</artifactId>
     <description>

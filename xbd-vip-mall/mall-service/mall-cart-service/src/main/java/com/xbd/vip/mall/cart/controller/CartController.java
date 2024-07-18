@@ -4,10 +4,7 @@ import com.xbd.mall.util.RespResult;
 import com.xbd.vip.mall.cart.model.Cart;
 import com.xbd.vip.mall.cart.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +20,7 @@ public class CartController {
      * @return
      */
     @GetMapping(value = "/list")
+    @CrossOrigin
     public RespResult<List<Cart>> list(){
         String userName="testUser";//TODO 用户名传入,当前为固定
         List<Cart> carts = cartService.list(userName);
