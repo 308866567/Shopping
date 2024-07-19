@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="mall-order-api" />
         <module name="mall-order-service" />
+        <module name="mall-pay-api" />
         <module name="mall-common" />
         <module name="mall-cart-service" />
         <module name="mall-page-web" />
@@ -16,6 +17,7 @@
         <module name="swagger-json" />
         <module name="mall-file-service" />
         <module name="mall-goods-api" />
+        <module name="mall-pay-service" />
         <module name="mall-page-api" />
         <module name="mall-user-api" />
         <module name="mall-canal-service" />
@@ -41,6 +43,8 @@
       <module name="mall-order-service" options="-parameters" />
       <module name="mall-page-api" options="-parameters" />
       <module name="mall-page-web" options="-parameters" />
+      <module name="mall-pay-api" options="-parameters" />
+      <module name="mall-pay-service" options="-parameters" />
       <module name="mall-search-api" options="-parameters" />
       <module name="mall-search-service" options="-parameters" />
       <module name="mall-search-web" options="-parameters" />
