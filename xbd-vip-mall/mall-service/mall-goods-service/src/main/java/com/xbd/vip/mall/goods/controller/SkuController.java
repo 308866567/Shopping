@@ -2,6 +2,7 @@ package com.xbd.vip.mall.goods.controller;
 
 
 import com.xbd.mall.util.RespResult;
+import com.xbd.vip.mall.cart.model.Cart;
 import com.xbd.vip.mall.goods.model.Sku;
 import com.xbd.vip.mall.goods.service.SkuService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,16 @@ public class SkuController {
 
     @Autowired
     private SkuService skuService;
+
+    /**
+     * 库存递减
+     * @return
+     */
+    @PutMapping(value = "/dcount")
+    public RespResult dcount(@RequestBody List<Cart> carts){
+        skuService.dcount(carts);
+        return RespResult.ok();
+    }
 
 
     @GetMapping(value = "/{id}")

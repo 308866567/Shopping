@@ -2,6 +2,7 @@ package com.xbd.vip.mall.goods.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xbd.vip.mall.cart.model.Cart;
 import com.xbd.vip.mall.goods.mapper.AdItemsMapper;
 import com.xbd.vip.mall.goods.mapper.SkuMapper;
 import com.xbd.vip.mall.goods.model.AdItems;
@@ -27,12 +28,27 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     @Autowired
     private SkuMapper skuMapper;
 
+    /**
+     * 库存递减
+     *
+     * @param carts
+     */
+    @Override
+    public void dcount(List<Cart> carts) {
+        for (Cart cart : carts) {
+            int count = skuMapper.decount(cart.getSkuId(), cart.getNum());
+            if (count <= 0) {
+                throw new RuntimeException("库存不足");
+            }
+        }
+    }
+
     /***
      * 根据推广产品分类ID查询Sku列表
      * cacheNames = "ad-items-skus":命名空间
      * key ="#id":入参id作为缓存的key，使用的是SpEL表达式
      */
-    @Cacheable(key ="#id")
+    @Cacheable(key = "#id")
     @Override
     public List<Sku> typeSkuItems(Integer id) {
         //1查询当前分类下的所有的列表信息
@@ -52,16 +68,17 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
      * 清理缓存
      * @param id
      */
-    @CacheEvict(key="#id")
+    @CacheEvict(key = "#id")
     @Override
     public void delTypeSkuItems(Integer id) {
 
     }
+
     /****
      * 修改缓存
      * @param id
      */
-    @CachePut(key ="#id")
+    @CachePut(key = "#id")
     @Override
     public List<Sku> updateTypeSkuItems(Integer id) {
         //1查询当前分类下的所有的列表信息

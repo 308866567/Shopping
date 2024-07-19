@@ -7,10 +7,20 @@
         <groupId>com.xbd</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mall-goods-api</artifactId>
     <description>
         shop_goods数据库对应的Api工程
     </description>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.xbd</groupId>
+            <artifactId>mall-cart-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 </project>

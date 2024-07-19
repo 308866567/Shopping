@@ -1,5 +1,6 @@
 package com.xbd.vip.mall.goods.feign;
 
+import com.xbd.vip.mall.cart.model.Cart;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -13,6 +14,14 @@ import java.util.List;
 @FeignClient(value = "mall-goods")
 @RequestMapping(value = "/sku")
 public interface SkuFeign {
+
+    /**
+     * 库存递减
+     * @param carts
+     * @return
+     */
+    @PutMapping(value = "/dcount")
+     RespResult dcount(@RequestBody List<Cart> carts);
 
     @GetMapping(value = "/{id}")
     RespResult<Sku> one(@PathVariable(value = "id") String id);
