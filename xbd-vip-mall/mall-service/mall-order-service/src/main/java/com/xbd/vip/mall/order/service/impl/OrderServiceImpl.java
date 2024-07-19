@@ -12,6 +12,7 @@ import com.xbd.vip.mall.order.mapper.OrderSkuMapper;
 import com.xbd.vip.mall.order.model.Order;
 import com.xbd.vip.mall.order.model.OrderSku;
 import com.xbd.vip.mall.order.service.OrderService;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,6 +40,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper,Order> implements 
      * @return
      */
     @Override
+    @GlobalTransactional
     public Boolean add(Order order) {
         //查询购物车数据
         RespResult<List<Cart>> cartResp = cartFeign.list(order.getCartIds());
@@ -68,6 +70,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper,Order> implements 
         order.setTotalNum(totalNum);
         order.setMoneys(moneys);
         orderMapper.insert(order);
+
+//        int q=10/0;
+//        System.out.println("库存递减---");
         //删除购物车记录
         cartFeign.delete(order.getCartIds());
         return true;

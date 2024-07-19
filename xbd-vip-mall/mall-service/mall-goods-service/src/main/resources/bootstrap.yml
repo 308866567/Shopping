@@ -19,6 +19,9 @@ spring:
       discovery:
         #Nacos的注册地址
         server-addr: 8.134.222.236:38848
+    alibaba:
+      seata:
+        tx-service-group: tx_shop
 # ====================MybatisPlus====================
 mybatis-plus:
   # xml配置文件的路径,写复杂sql

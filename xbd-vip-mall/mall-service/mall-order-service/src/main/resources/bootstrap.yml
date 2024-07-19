@@ -16,6 +16,9 @@
         discovery:
           #Nacos的注册地址
           server-addr: 8.134.222.236:38848
+      alibaba:
+        seata:
+          tx-service-group: tx_shop
     main:
       allow-bean-definition-overriding: true
   feign:
