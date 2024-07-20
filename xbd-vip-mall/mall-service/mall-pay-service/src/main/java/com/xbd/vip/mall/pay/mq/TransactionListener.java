@@ -18,10 +18,12 @@ import org.springframework.stereotype.Component;
 public class TransactionListener implements RocketMQLocalTransactionListener {
 
     @Autowired
-    private  PayLogService payLogService;
+    private PayLogService payLogService;
+
     /**
      * 当向broker发送half消息成功后,调用该方法
      * 用于执行本地事务操作
+     *
      * @param msg
      * @param o
      * @return
@@ -30,10 +32,10 @@ public class TransactionListener implements RocketMQLocalTransactionListener {
     public RocketMQLocalTransactionState executeLocalTransaction(Message msg, Object o) {
         try {
             //本地事务
-            String result = msg.getPayload().toString();
+            String result = new String((byte[]) msg.getPayload(), "UTF-8");
             PayLog payLog = JSON.parseObject(result, PayLog.class);
             payLogService.add(payLog);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return RocketMQLocalTransactionState.ROLLBACK;
         }
@@ -42,6 +44,7 @@ public class TransactionListener implements RocketMQLocalTransactionListener {
 
     /**
      * 超时回查
+     *
      * @param message
      * @return
      */

@@ -34,19 +34,26 @@
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   #日志配置
   logging:
+    level:
+      com.alibaba.nacos.client.config.impl: WARN
+#      root: debug
     pattern:
       console: "%msg%n"
-#producer 发消息到rocketmq
-rocketmq:
-  name-server: 8.134.222.236:39876
-  producer:
-    group: pay-group
-    send-message-timeout: 300000
-    compress-message-body-threshold: 4096
-    max-message-size: 4194304
-    retry-times-when-send-async-failed: 0
-    retry-next-server: true
-    retry-times-when-send-failed: 2
+  #producer 发消息到rocketmq
+  rocketmq:
+    name-server: 8.134.222.236:39876
+    producer:
+      group: pay-group
+#      发送消息的超时时间，单位是毫秒（ms）
+      send-message-timeout: 30000
+#      消息体压缩的阈值
+      compress-message-body-threshold: 4096
+#      消息的最大大小限制，单位为字节
+      max-message-size: 4194304
+      retry-times-when-send-async-failed: 0
+#      在消息发送失败时是否尝试连接下一个服务器进行重试
+      retry-next-server: false
+      retry-times-when-send-failed: 2
 
 
 

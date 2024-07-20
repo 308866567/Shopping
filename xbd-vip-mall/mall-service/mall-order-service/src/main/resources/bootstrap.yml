@@ -38,9 +38,11 @@
 
   #日志配置
   logging:
+    level:
+      com.alibaba.nacos.client.config.impl: WARN
     pattern:
       console: "%msg%n"
-
-
+  rocketmq:
+    name-server: 8.134.222.236:39876
 
 

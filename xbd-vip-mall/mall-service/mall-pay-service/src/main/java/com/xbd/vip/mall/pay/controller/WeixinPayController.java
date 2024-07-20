@@ -9,11 +9,13 @@ import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.Date;
 
 @RestController
@@ -24,7 +26,7 @@ public class WeixinPayController {
     @Autowired
     private PayLogService payLogService;
 
-    @Autowired
+    @Resource
     private RocketMQTemplate rocketMQTemplate;
 
     /***
