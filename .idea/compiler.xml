@@ -17,6 +17,7 @@
         <module name="swagger-json" />
         <module name="mall-file-service" />
         <module name="mall-goods-api" />
+        <module name="mall-seckill-service" />
         <module name="mall-pay-service" />
         <module name="mall-page-api" />
         <module name="mall-user-api" />
@@ -27,6 +28,7 @@
         <module name="mall-search-api" />
         <module name="mall-goods-service" />
         <module name="mall-search-web" />
+        <module name="mall-seckill-api" />
       </profile>
     </annotationProcessing>
   </component>
@@ -48,6 +50,8 @@
       <module name="mall-search-api" options="-parameters" />
       <module name="mall-search-service" options="-parameters" />
       <module name="mall-search-web" options="-parameters" />
+      <module name="mall-seckill-api" options="-parameters" />
+      <module name="mall-seckill-service" options="-parameters" />
       <module name="mall-service-dependency" options="-parameters" />
       <module name="mall-user-api" options="-parameters" />
       <module name="mall-user-service" options="-parameters" />

@@ -7,6 +7,7 @@
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-api/mall-page-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-api/mall-pay-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-api/mall-search-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-api/mall-seckill-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-api/mall-user-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-api/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-api/src/main/resources" charset="UTF-8" />
@@ -20,6 +21,7 @@
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-service/mall-order-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-service/mall-pay-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-service/mall-search-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-service/mall-seckill-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-service/mall-user-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-service/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/xbd-vip-mall/mall-service/src/main/resources" charset="UTF-8" />

@@ -34,8 +34,8 @@
       log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   #日志配置
   logging:
-    level:
-      com.alibaba.nacos.client.config.impl: WARN
+#    level:
+#      com.alibaba.nacos.client.config.impl: WARN
 #      root: debug
     pattern:
       console: "%msg%n"
