@@ -9,7 +9,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <description>
-        数据搜索
+        ES数据搜索
     </description>
 
     <artifactId>mall-search-service</artifactId>
@@ -23,6 +23,12 @@
         <dependency>
             <groupId>com.xbd</groupId>
             <artifactId>mall-search-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xbd</groupId>
+            <artifactId>mall-seckill-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
