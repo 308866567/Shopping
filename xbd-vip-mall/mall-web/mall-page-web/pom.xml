@@ -11,7 +11,7 @@
 
     <artifactId>mall-page-web</artifactId>
     <description>
-        商品详情页生成
+        静态页生成工程
     </description>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -22,6 +22,12 @@
         <dependency>
             <groupId>com.xbd</groupId>
             <artifactId>mall-goods-api</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xbd</groupId>
+            <artifactId>mall-seckill-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>

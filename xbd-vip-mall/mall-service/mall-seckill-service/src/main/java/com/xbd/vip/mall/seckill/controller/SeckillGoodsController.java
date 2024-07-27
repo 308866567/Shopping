@@ -16,5 +16,16 @@ public class SeckillGoodsController {
     @Autowired
     private SeckillGoodsService seckillGoodsService;
 
+    /**
+     * mysql查询商品详细
+     * localhost:8092/seckill/goods/1
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/{id}")
+    RespResult<SeckillGoods> one(@PathVariable("id") String id){
+        return RespResult.ok(seckillGoodsService.getById(id));
+    }
+
 
 }
