@@ -11,7 +11,8 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableFeignClients(basePackages = {
         "com.xbd.vip.mall.page.feign",
         "com.xbd.vip.mall.search.feign",
-        "com.xbd.vip.mall.goods.feign"})
+        "com.xbd.vip.mall.goods.feign",
+        "com.xbd.vip.mall.*.feign"})
 //@ComponentScan(basePackages = "com.xbd.vip.mall.config")
 public class MallCanalApplication {
     public static void main(String[] args) {

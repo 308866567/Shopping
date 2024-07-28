@@ -28,7 +28,7 @@ public class SeckillGoods {
     private String content;
     private Integer price;
     @Column(name = "seckill_price")
-    private Integer seckillPrice; //seckill_price
+    private Double seckillPrice; //seckill_price
     private Integer num;
     @Column(name = "store_count")
     private Integer storeCount;
