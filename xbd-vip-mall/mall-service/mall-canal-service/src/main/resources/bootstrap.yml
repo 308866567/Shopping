@@ -23,3 +23,13 @@ logging:
     console: "%msg%n"
   level:
     root: info
+
+
+elaticjob:
+  zookeeper:
+    server-lists: 8.134.222.236:32181
+    namespace: synctask
+
+#动态定时任务案例
+dynamiczk: 8.134.222.236:32181
+dynamicnamespace: dynamictask
