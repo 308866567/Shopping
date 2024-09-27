@@ -27,11 +27,6 @@ public class SeckillActivityHandler implements EntryHandler<SeckillActivity> {
      */
     @Override
     public void insert(SeckillActivity seckillActivity) {
-        //常用时间倒过即可
-        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("ss mm HH dd MM ? yyyy");
-        String cron=simpleDateFormat.format(seckillActivity.getEndTime());
-        //传递的额外参数(活动id)用于根据当前活动id查询有哪些商品在该活动下,然后更新商品对应静态页和索引
-        dynamicTaskCreate.create(seckillActivity.getId(),cron,1,new DynamicJob(),seckillActivity.getId());
     }
 
     @Override

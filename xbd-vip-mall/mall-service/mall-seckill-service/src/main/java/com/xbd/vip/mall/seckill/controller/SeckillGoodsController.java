@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/seckill/goods")
 public class SeckillGoodsController {
@@ -25,6 +27,18 @@ public class SeckillGoodsController {
     @GetMapping(value = "/{id}")
     RespResult<SeckillGoods> one(@PathVariable("id") String id){
         return RespResult.ok(seckillGoodsService.getById(id));
+    }
+
+
+    /**
+     * 根据活动查询秒杀商品集合
+     * @param acid
+     * @return
+     */
+    @GetMapping(value = "/act/{acid}")
+    RespResult<List<SeckillGoods>> actGoods(@PathVariable("acid") String acid){
+        List<SeckillGoods>  seckillGoods=seckillGoodsService.actGoods(acid);
+        return RespResult.ok(seckillGoods);
     }
 
 

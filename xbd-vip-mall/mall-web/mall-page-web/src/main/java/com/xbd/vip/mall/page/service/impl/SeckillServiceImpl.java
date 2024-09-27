@@ -69,4 +69,12 @@ public class SeckillServiceImpl implements SeckillPageService {
         }
         return null;
     }
+
+    @Override
+    public void delete(String id) {
+        File dest = new File(pagePath, id + ".html");
+        if(dest.exists()){
+            dest.delete();
+        }
+    }
 }
