@@ -9,13 +9,13 @@ spring:
     nacos:
       config:
         file-extension: yaml
-        server-addr: 8.134.222.236:38848
+        server-addr: yougoushop.com:8848
       discovery:
         #Nacos的注册地址
-        server-addr: 8.134.222.236:38848
+        server-addr: yougoushop.com:8848
 #Canal配置
 canal:
-  server: 8.134.222.236:31111
+  server: yougoushop.com:11111
   destination: example
 #日志配置
 logging:
@@ -27,9 +27,9 @@ logging:
 
 elaticjob:
   zookeeper:
-    server-lists: 8.134.222.236:32181
+    server-lists: yougoushop.com:2181
     namespace: synctask
 
-#动态定时任务案例
-dynamiczk: 8.134.222.236:32181
+#动态定时任务配置
+dynamiczk: yougoushop.com:2181
 dynamicnamespace: dynamictask

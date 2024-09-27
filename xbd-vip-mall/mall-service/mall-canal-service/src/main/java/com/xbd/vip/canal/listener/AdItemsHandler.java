@@ -23,7 +23,7 @@ public class AdItemsHandler implements EntryHandler<AdItems> {
     @Qualifier(value = "restTemplate")
     private RestTemplate restTemplate;
     nginx清理缓存地址 TODO 需要虚拟机端口转发
-    String url = "http://192.168.100.130/purge/sku/aditems/type?id=1";
+    String url = "http://yougoushop.com/purge/sku/aditems/type?id=1";
     */
     @Override
     public void insert(AdItems adItems) {

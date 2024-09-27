@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
  * 2.分片指定
  * 3.指定Zookeeper中的命名空间
  */
-@Component
-@ElasticSimpleJob(
-        jobName = "${elaticjob.zookeeper.namespace}",
-        shardingTotalCount = 1,
-        cron = "0/1 * * * * ?"//一秒一次
-)
-public class StaticJobTask implements SimpleJob {
+//@Component
+//@ElasticSimpleJob(
+//        jobName = "${elaticjob.zookeeper.namespace}",
+//        shardingTotalCount = 1,
+//        cron = "0/1 * * * * ?"//一秒一次
+//)
+public class StaticJobTaskTest implements SimpleJob {
     /**
      *
      * @param shardingContext
