@@ -7,21 +7,24 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="mall-api-gateway" />
-        <module name="mall-order-api" />
-        <module name="mall-order-service" />
         <module name="mall-pay-api" />
         <module name="mall-common" />
         <module name="mall-cart-service" />
-        <module name="mall-page-web" />
-        <module name="mall-cart-api" />
         <module name="swagger-json" />
         <module name="mall-file-service" />
         <module name="mall-goods-api" />
         <module name="mall-seckill-service" />
+        <module name="mall-user-api" />
+        <module name="mall-seckill-api" />
+        <module name="mall-api-gateway" />
+        <module name="mall-order-api" />
+        <module name="mall-order-service" />
+        <module name="mall-dw-api" />
+        <module name="mall-dw-service" />
+        <module name="mall-page-web" />
+        <module name="mall-cart-api" />
         <module name="mall-pay-service" />
         <module name="mall-page-api" />
-        <module name="mall-user-api" />
         <module name="mall-canal-service" />
         <module name="mall-service-dependency" />
         <module name="mall-search-service" />
@@ -29,7 +32,6 @@
         <module name="mall-search-api" />
         <module name="mall-goods-service" />
         <module name="mall-search-web" />
-        <module name="mall-seckill-api" />
       </profile>
     </annotationProcessing>
   </component>
@@ -40,6 +42,8 @@
       <module name="mall-cart-api" options="-parameters" />
       <module name="mall-cart-service" options="-parameters" />
       <module name="mall-common" options="-parameters" />
+      <module name="mall-dw-api" options="-parameters" />
+      <module name="mall-dw-service" options="-parameters" />
       <module name="mall-file-service" options="-parameters" />
       <module name="mall-goods-api" options="-parameters" />
       <module name="mall-goods-service" options="-parameters" />

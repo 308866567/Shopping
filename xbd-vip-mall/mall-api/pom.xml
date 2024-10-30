@@ -17,6 +17,7 @@
         <module>mall-order-api</module>
         <module>mall-pay-api</module>
         <module>mall-seckill-api</module>
+        <module>mall-dw-api</module>
     </modules>
     <artifactId>mall-api</artifactId>
     <description>
