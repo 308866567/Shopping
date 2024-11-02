@@ -11,8 +11,7 @@ public class TimeUtil {
     public static final String format4 = "yyyy年MM月dd日";
     public static final String unit_hour = "hour";
     public static final String unit_day = "day";
-
-    /***
+     /***
      * 当前时间增加N Unit
      */
     public static String beforeTime(String unit,Integer num){

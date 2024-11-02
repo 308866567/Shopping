@@ -28,6 +28,7 @@ public interface HotGoodsMapper extends BaseMapper<HotGoods> {
 
     /***
      * 排除指定数据  NOT IN ('123.html','456.html','789.html')
+     *
      */
     @Select("SELECT ip,uri,__time as accesstime FROM mslogs WHERE __time>= TIMESTAMP '${time}' AND uri NOT IN('${urls}') LIMIT #{size}")
     List<HotGoods> searchExclude(@Param("size")Integer size,@Param("time")String time,@Param("urls")String urls);
