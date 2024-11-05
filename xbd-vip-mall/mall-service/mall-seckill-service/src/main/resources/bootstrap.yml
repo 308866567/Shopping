@@ -23,11 +23,12 @@ elaticjob:
   zookeeper:
     server-lists: yougoushop.com:2181
     namespace: hotsync
+# 热门商品的配置
 hot:
   #查询条数
   size: 100
   #N小时的数据
-  hour: 1
+  hour: 1000
   #每小时查询超过max次
   max: 1
 # ====================MybatisPlus====================
